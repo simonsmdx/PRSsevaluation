@@ -88,7 +88,7 @@ The `prs_pipe.sh` has to be run from repository directory in order to call the o
   $ for i in $(awk '{ print $2}' user_ids.tsv | tail -n +2 | sed 's/[[:blank:]]//g'); do
       wget -O "data/$i" "https://opensnp.org/data/"$i;
   done
-```
+``` 
 
 - Furthermore, each sample can be converted to vcf format via `snps2vcf.py`
 ```
