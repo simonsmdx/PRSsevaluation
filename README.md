@@ -44,14 +44,19 @@ If it's getting in the opposite direction, the less accurate the classifier is. 
 ## Installation
 The tested environment is Ubuntu 20.04.4 LTS having the following specifications. If you are working on a different environment, pleas be aware that a `DockerFile` is available to build the image and run the test in a conatiner.
 * Linux - Ubuntu/Debian
-* Python (3.8.10 with snps 2.6.0, pandas 1.4.4)
+* Python (3.8.10 with snps 2.6.0, pandas)
 * plink; gawk; bcftools
 * R: ggplot2, reshape2; dplyr; caret; plotly; tidymodels; htmlwidgets; 
 
 * RUN Docker File:
 ```
-   a######DO not forget abotut docker
+   $ git clone https://github.com/smntest00/PRSsevaluation
+   $ docker build --file prs.Dockerfile --tag prs_evaluation .
+   $ docker run  -i -t --entrypoint /bin/bash prs_evaluation:latest
 ```
+- based on requirements.txt & requirements.txt
+- Docker File must be run form repository directory
+
 ## Usage
 The `prs_pipe.sh` has to be run from repository directory in order to call the other subscripts from `/tool` to perform the analysis
 ```
