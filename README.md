@@ -98,7 +98,7 @@ The `prs_pipe.sh` has to be run from repository directory in order to call the o
 ```
 
 - The format conversion can also be applied with **(TXT to VCF)**  `bcftools`
-- Sample that could not eb converted with pyscript: *8655.ancestry.7006*
+- Sample that could not be converted with pyscript: *8655.ancestry.7006*
 ```
   $ gawk -i inplace -F'\t' '{ print $1"\t"$2"\t"$3"\t"$4$5; }' 8655.ancestry.7006
   $ bcftools convert -c ID,CHROM,POS,AA \
