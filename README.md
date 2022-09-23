@@ -3,9 +3,9 @@
 ## Introduction
 The present repository contains a set of tools to perform and evaluate 2 PRS models derived from GWAS Analysis on target data form <b>23andme & ancestry</b>.
 The `prs_pipe.sh` has the power to analyze large amount fo samples, determine the sex type of each sample and apply a pre-QC step via plink, perform the PRS and validate both models.
-Only for evaluation purpose, without computing the PRS and transform sample formats to vcf, it is enough to run the `Rscript` on `dataframe.txt`. 
+Only for evaluation purpose, without computing the PRS and transform sample formats to vcf, it is enough to run `prs_evaluation.R` on `prs_results_dataframe.txt`. 
 
-**Note:** The distribution plot and ROC Curve hae only demonstrative role, they are not made based on the current data or evaluation.
+**Note:** The distribution plot and ROC Curve have only demonstrative role, they are not made based on the current data or evaluation.
 
 
 ## Performance
@@ -45,13 +45,13 @@ If it's getting in the opposite direction, the less accurate the classifier is. 
 The tested environment is Ubuntu 20.04.4 LTS having the following specifications. If you are working on a different environment, pleas be aware that a `DockerFile` is available to build the image and run the test in a conatiner.
 * Linux - Ubuntu/Debian
 * Python (3.8.10 with snps 2.6.0, pandas 1.4.4)
-* plink - 1.90b6.26; gawk - 5.0.1
+* plink; gawk; bcftools
+* R: ggplot2, reshape2; dplyr; caret; plotly; tidymodels; htmlwidgets; 
 
 * RUN Docker File:
 ```
    a######DO not forget abotut docker
 ```
-
 ## Usage
 The `prs_pipe.sh` has to be run from repository directory in order to call the other subscripts from `/tool` to perform the analysis
 ```
@@ -72,7 +72,7 @@ The `prs_pipe.sh` has to be run from repository directory in order to call the o
 ```
 
 #### Example
-- Present Script generates QC reports based on plink and combines all PRS results for both models, into one data frame further use for evaluation.
+- Present script generates QC reports with **PLINK** and combines all PRS results for both models, into one data frame further use for evaluation.
 ```
 ./prs_pipe.sh -f /home/user/prs/vcfs -a /home/user/prs/model_a -b /home/user/prs/model_b -u /home/user/prs/user_ids.tsv -o /path/2//home/user/prs/output -r
 ```
@@ -97,7 +97,8 @@ The `prs_pipe.sh` has to be run from repository directory in order to call the o
     -o O        /path/2/output prefix for vcf
 ```
 
-- To the unconverted samples format can be applied the followed cmds (e.g. )
+- The format conversion can also be applied with **(TXT to VCF)**  `bcftools`
+- Sample that could not eb converted with pyscript: *8655.ancestry.7006*
 ```
   $ gawk -i inplace -F'\t' '{ print $1"\t"$2"\t"$3"\t"$4$5; }' 8655.ancestry.7006
   $ bcftools convert -c ID,CHROM,POS,AA \
