@@ -1,3 +1,0 @@
-argparse
-snps==2.6.0
-pandas
